@@ -106,6 +106,8 @@ export default {
     // 宽高比是2:1  往下撑是 高度占宽度的50%要这样写。。。  w:375.2 h:187.6
     padding-bottom: 50%;
     // background: yellow;
+  .icons
+    margin .1rem 0
   .icon {
     position: relative;
     overflow: hidden;
