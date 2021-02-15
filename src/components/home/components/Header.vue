@@ -2,13 +2,16 @@
     <div class="header">
         <div class="header-left">返回</div>
         <div class="header-content">请输入城市</div>
-        <div class="header-right">城市</div>
+        <div class="header-right">{{city}}</div>
     </div>
 </template>
 
 <script>
 export default {
     name: 'Header',
+    props: {
+        city:String
+    },
     data() {
         return {
             

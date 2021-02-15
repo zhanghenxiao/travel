@@ -1,8 +1,8 @@
 <template>
   <!-- npm install swiper vue-awesome-swiper@2.6.7 --save 这个是稳定版本 -->
   <div class="wrapper">
-    <swiper :options="swiperOptions">
-        <swiper-slide v-for="item in swiperList" :key="item.id">
+    <swiper :options="swiperOptions" v-if="showSwiper">
+        <swiper-slide v-for="item in list" :key="item.id">
             <img class="swiper-img" :src="item.imgUrl" alt="">
         </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
@@ -13,22 +13,17 @@
 <script>
 export default {
     name: 'HomeSwiper',
+    props: {
+        list: Array
+    },
     data() {
         return {
             swiperOptions: {
                 // 分页
                 pagination: '.swiper-pagination',
                 loop: true
+                
             },
-            swiperList: [
-                {
-                    id: "0001",
-                    imgUrl: "http://img1.qunarzz.com/piao/fusion/1801/1a/94428c6dea109402.jpg_640x200_2cf590d8.jpg"
-                },{
-                    id: "0002",
-                    imgUrl: "http://img1.qunarzz.com/piao/fusion/1802/42/7c92b9a381e46402.jpg_640x200_1cdce2a4.jpg"
-                }
-                ]
         }
     },
     mounted() {
@@ -37,6 +32,13 @@ export default {
     methods: {
         
     },
+    computed: {
+        //此时的list是空的我们的数据还在请求 故会渲染为最后的页面  使用v-if="list.length" 这样写不够优雅
+        // 故使用计算属性  cool
+        showSwiper() {
+            return this.list.length
+        }
+    }
 };
 </script>
 

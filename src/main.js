@@ -18,7 +18,10 @@ import 'styles/iconfont.css'
 // 2.6.7稳定版
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
-Vue.use(VueAwesomeSwiper,)
+Vue.use(VueAwesomeSwiper)
+
+import axios from 'axios'
+Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
 
