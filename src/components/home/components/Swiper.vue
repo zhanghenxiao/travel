@@ -45,11 +45,13 @@ export default {
 .wrapper >>> .swiper-pagination-bullet-active
     background-color #fff
 .wrapper
+    // 这个也是必加的 overflow hidden
     overflow hidden
     width 100%
+    // 这个也是必加的 height 0
     height 0
     // fast 3G 是testdiv样式会顶上去
-    // 图片w:640 h:200 比例是31.25%，图片宽高比例始终自适应保持在31.25% 也可写成width:100% height:31.25vw 有兼容性问题
+    // 图片w:640 h:200  高度占宽度的比例是31.25%，图片宽高比例始终自适应保持在31.25% 也可写成width:100% height:31.25vw 有兼容性问题
     padding-bottom 31.25%
     background-color #eee
     // 样式不会生效因为scoped 修饰的是当前组件的样式!!这是个细节 ，不会修饰swiper组件的样式！ ，可以去掉scoped,但是不是我们想要的
