@@ -2,8 +2,8 @@
     <div>
         <city-header></city-header>
         <city-search></city-search>
-        <city-list></city-list>
-        <city-alphabet></city-alphabet>
+        <city-list :hotlist='hotCities' :citylist='cities'></city-list>
+        <city-alphabet :citylist='cities'></city-alphabet>
     </div>
 </template>
 
@@ -22,14 +22,19 @@ export default {
     },
     data() {
         return {
-            
+            hotCities: [],
+            cities: {}
         };
     },
     mounted() {
-        
+        this.getInfo()
     },
     methods: {
-        
+        async getInfo() {
+            let {data:{data}} = await this.$http.get('/api/city.json')
+            this.hotCities = data.hotCities
+            this.cities = data.cities
+        }
     },
 };
 </script>

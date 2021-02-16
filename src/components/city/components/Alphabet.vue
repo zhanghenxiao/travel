@@ -1,8 +1,7 @@
 <template>
     <div>
         <ul class="list">
-            <li>A</li>
-            <li>A</li>
+            <li v-for="(item,key) in citylist" :key="key">{{key}}</li>
         </ul>
     </div>
 </template>
@@ -10,6 +9,9 @@
 <script>
 export default {
     name: 'Alphabet',
+    props: {
+        citylist: Object
+    },
     data() {
         return {
             

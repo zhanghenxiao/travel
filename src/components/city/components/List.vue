@@ -12,70 +12,15 @@
             <div class="area">
                 <div class="area-title border-topbottom">热门城市</div>
                 <div class="area-city">
-                    <div class="city-wrapper">
-                        <div class="city">北京</div>
-                    </div>
-                    <div class="city-wrapper">
-                        <div class="city">北京</div>
-                    </div>
-                    <div class="city-wrapper">
-                        <div class="city">北京</div>
-                    </div>
-                    <div class="city-wrapper">
-                        <div class="city">北京</div>
+                    <div class="city-wrapper" v-for="item in hotlist" :key="item.id">
+                        <div class="city">{{item.name}}</div>
                     </div>
                 </div>
             </div>
-            <div class="area">
-                <div class="area-title border-topbottom">A</div>
-                <ul class="item-list">
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                </ul>
-                <div class="area-title border-topbottom">A</div>
-                <ul class="item-list">
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                </ul>
-                <div class="area-title border-topbottom">A</div>
-                <ul class="item-list">
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                </ul>
-                <div class="area-title border-topbottom">A</div>
-                <ul class="item-list">
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                </ul>
-                <div class="area-title border-topbottom">A</div>
-                <ul class="item-list">
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
-                    <li class="item border-bottom">阿拉尔</li>
+            <div class="area" v-for="(item,key) in citylist" :key="key">
+                <div class="area-title border-topbottom">{{key}}</div>
+                <ul class="item-list" v-for="i in item" :key="i.id">
+                    <li class="item border-bottom">{{i.name}}</li>
                 </ul>
             </div>
         </div>
@@ -86,6 +31,10 @@
 import BScroll from 'better-scroll'
 export default {
     name: 'List',
+    props: {
+        hotlist: Array,
+        citylist: Object,
+    },
     data() {
         return {
             
