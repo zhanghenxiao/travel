@@ -23,19 +23,23 @@ export default {
     data() {
         return {
             hotCities: [],
-            cities: {}
+            cities: {},
+            
         };
     },
     mounted() {
         this.getInfo()
+       
     },
     methods: {
         async getInfo() {
             let {data:{data}} = await this.$http.get('/api/city.json')
             this.hotCities = data.hotCities
             this.cities = data.cities
-        }
+        },
+       
     },
+    
 };
 </script>
 

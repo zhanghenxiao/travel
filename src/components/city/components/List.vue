@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-            <div class="area" v-for="(item,key) in citylist" :key="key">
+            <div class="area" v-for="(item,key) in citylist" :key="key" :ref="key">
                 <div class="area-title border-topbottom">{{key}}</div>
                 <ul class="item-list" v-for="i in item" :key="i.id">
                     <li class="item border-bottom">{{i.name}}</li>
@@ -29,6 +29,7 @@
 
 <script>
 import BScroll from 'better-scroll'
+import event from '../../../event'
 export default {
     name: 'List',
     props: {
@@ -37,16 +38,35 @@ export default {
     },
     data() {
         return {
-            
+           dom: '' 
         };
     },
     mounted() {
         // 使用better-scroll注意布局样式
-        let bs = new BScroll(this.$refs.list)
+        // let 定义的是局部的,下面无法使用，  this才是会挂载在全局
+        // let bs = new BScroll(this.$refs.list)
+        this.bs = new BScroll(this.$refs.list)
+        event.$on('change',this.change)
     },
     methods: {
-        
+         change (data) {
+            // console.log('on get', data);
+            this.dom = data
+        },
     },
+    watch: {
+        dom () {
+            if(this.dom) {
+                // ref是循环出来的是个数组故需取索引  若直接定义的是dom
+                let page = this.$refs[this.dom][0]
+                // 利用组件通讯，滚动到对应的Dom上去
+                this.bs.scrollToElement(page)
+            }
+        }
+    },
+    destroyed() {
+        event.$off('change',this.change)
+    }
 };
 </script>
 
