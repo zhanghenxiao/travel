@@ -3,22 +3,28 @@
         <div class="header-left">返回</div>
         <div class="header-content">请输入城市</div>
         <router-link to="/city">
-            <div class="header-right">{{city}}</div>
-        </router-link>
-        
+            <div class="header-right">{{double}}</div>
+        </router-link>   
     </div>
 </template>
 
 <script>
+import { mapState,mapGetters } from 'vuex'
 export default {
     name: 'Header',
-    props: {
-        city:String
-    },
     data() {
         return {
             
         };
+    },
+    computed: {
+        // 把state中city值 同时以city命名导出到计算属性中
+        // ...mapState(['city'])
+        // 导出是数组 同样也可以是对象
+        ...mapState({
+            current: 'city'
+        }),
+        ...mapGetters(['double'])
     },
     mounted() {
         

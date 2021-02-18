@@ -5,22 +5,22 @@
                 <div class="area-title border-topbottom">当前城市</div>
                 <div class="area-city">
                     <div class="city-wrapper">
-                        <div class="city">北京</div>
+                        <div class="city">{{city}}</div>
                     </div>
                 </div>
             </div>
             <div class="area">
                 <div class="area-title border-topbottom">热门城市</div>
                 <div class="area-city">
-                    <div class="city-wrapper" v-for="item in hotlist" :key="item.id">
+                    <div class="city-wrapper" v-for="item in hotlist" :key="item.id" @click="handleChangeCity(item.name)">
                         <div class="city">{{item.name}}</div>
                     </div>
                 </div>
             </div>
             <div class="area" v-for="(item,key) in citylist" :key="key" :ref="key">
                 <div class="area-title border-topbottom">{{key}}</div>
-                <ul class="item-list" v-for="i in item" :key="i.id">
-                    <li class="item border-bottom">{{i.name}}</li>
+                <ul class="item-list" v-for="i in item" :key="i.id" >
+                    <li class="item border-bottom" @click="handleChangeCity(i.name)">{{i.name}}</li>
                 </ul>
             </div>
         </div>
@@ -30,6 +30,7 @@
 <script>
 import BScroll from 'better-scroll'
 import event from '../../../event'
+import { mapState, mapMutations } from 'vuex'
 export default {
     name: 'List',
     props: {
@@ -40,6 +41,9 @@ export default {
         return {
            dom: '' 
         };
+    },
+    computed: {
+        ...mapState(['city'])
     },
     mounted() {
         // 使用better-scroll注意布局样式
@@ -53,6 +57,19 @@ export default {
             // console.log('on get', data);
             this.dom = data
         },
+        handleChangeCity(name) {
+            console.log(name);
+            // 第一种以action ->mutation
+            // this.$store.dispatch('change',name)
+            // 第二种直接至 mutation
+            // this.$store.commit('change',name)
+            // 第三种step2
+            this.change(name)
+            // 网页也有二个路由跳转a链接 location.herf ,vue 也有二种router-link router.push
+            this.$router.push('/')
+        },
+        // 第三种step1
+        ...mapMutations(['change'])
     },
     watch: {
         dom () {
@@ -113,5 +130,6 @@ export default {
         .item-list
             // background-color #eee
             .item
+                line-height .44rem
                 padding-left .2rem
 </style>

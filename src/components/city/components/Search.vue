@@ -6,7 +6,7 @@
         <div class="search-content" v-show="keyword" ref="search">
             <ul>
                 <!-- 检测到重复键 故加index-->
-                <li class="border-bottom" v-for="(item,index) in list" :key="index">{{item}}</li>
+                <li class="border-bottom" v-for="(item,index) in list" :key="index"  @click="handleChangeCity(item)">{{item}}</li>
                 <li v-show="hasNoData">没有匹配到数据</li>
             </ul>
         </div>
@@ -35,6 +35,12 @@ export default {
         this.scroll = new Bscroll(this.$refs.search)
     },
     methods: {
+        handleChangeCity(name) {
+            console.log(name);
+            // this.$store.dispatch('change',name)
+            this.$store.commit('change',name)
+            this.$router.push('/')
+        }
     },
     watch: {
         keyword() {

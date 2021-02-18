@@ -1,6 +1,6 @@
 <template>
     <div>
-        <home-header :city='city'></home-header>
+        <home-header></home-header>
         <home-swiper :list='swiperList'></home-swiper>
         <home-icons></home-icons>
         <!-- 测试swiper 的样式是否ok 在netwrok fast 3g的情况下 -->
