@@ -1,9 +1,9 @@
-function change(state,data) {
+function changeCity(state,data) {
   state.city = data
   try {
     localStorage.city = data
   }catch(e){}
 } 
 export default {
-  change
+  changeCity
 }

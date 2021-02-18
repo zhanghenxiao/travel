@@ -16,7 +16,7 @@ import HomeSwiper from './components/Swiper'
 import HomeIcons from './components/Icons'
 import HomeRecommend from './components/Recommend'
 import HomeWeekend from './components/Weekend'
-// import axios from 'axios'
+import { mapState } from 'vuex'
 export default {
     name: 'Home',
     components: {
@@ -28,9 +28,15 @@ export default {
     },
     data() {
         return {
-            city: '',
+            // city: '',
+            // 标识是否需重新发请求
+            lastCity: '',
             swiperList: []
         };
+    },
+    computed: {
+        // 需要同步city 数据才行
+        ...mapState(['city'])
     },
     mounted() {
         // 发axios 很强大 在浏览器发xhr 在服务端会发http请求
@@ -38,17 +44,25 @@ export default {
         // 在webpack 的项目中只有static这个目录能被外部访问，故我们的模拟数据放在static下
         // 
         this.getHomeInfo()
+        this.lastCity = this.city
     },
     methods: {
         async getHomeInfo(){
         // '/static/mock/index.json'线上项目这样的接口很明显是不行的 需要的是这样的'/api/index.json'
         // vue提供了代理转发机制proxyTable 在config目录中index.js
         //  let {data} = await this.$http.get('/static/mock/index.json')
-        let {data:{data}} = await this.$http.get('/api/index.json') 
-         this.city = data.city
+        let {data:{data}} = await this.$http.get('/api/index.json?city=' + this.city) 
+        //  this.city = data.city
          this.swiperList = data.swiperList
         }
         
+    },
+    activated() {
+        // 城市改变时 再次发请求
+        if (this.lastCity !== this.city) {
+            this.lastCity = this.city
+            this.getHomeInfo()
+        }
     },
 };
 </script>

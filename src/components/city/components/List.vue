@@ -60,16 +60,16 @@ export default {
         handleChangeCity(name) {
             console.log(name);
             // 第一种以action ->mutation
-            // this.$store.dispatch('change',name)
+            // this.$store.dispatch('changeCity',name)
             // 第二种直接至 mutation
-            // this.$store.commit('change',name)
+            // this.$store.commit('changeCity',name)
             // 第三种step2
-            this.change(name)
+            this.changeCity(name)
             // 网页也有二个路由跳转a链接 location.herf ,vue 也有二种router-link router.push
             this.$router.push('/')
         },
         // 第三种step1
-        ...mapMutations(['change'])
+        ...mapMutations(['changeCity'])
     },
     watch: {
         dom () {
