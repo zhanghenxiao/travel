@@ -22,6 +22,7 @@ Vue.use(VueAwesomeSwiper)
 
 import axios from 'axios'
 Vue.prototype.$http = axios
+import 'babel-polyfill'
 
 Vue.config.productionTip = false
 
