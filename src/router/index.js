@@ -4,8 +4,6 @@ import home from '@/components/home/Home'
 import city from '@/components/city/City'
 import detail from '@/components/detail/Detail'
 
-
-
 Vue.use(Router)
 
 export default new Router({
@@ -29,6 +27,10 @@ export default new Router({
       component: detail
     },
   ],
+  // 滚动行为 至（0,0）位置
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
   // mode: 'history',
   // base: process.env.BASE_URL,
   // routes

@@ -12,22 +12,29 @@ import detailBanner from './components/Banner'
 import detailHeader from './components/Header'
 import detailList from './components/List'
 export default {
+  name: 'detail',
   data() {
     return {
-      list: [{
-        title: '成人票',
-        children: [{
-          title: '12'
-        }]
-      },{
-        title: '儿童票'
-      }]
+      list: []
     }
   },
   components: {
     detailBanner,
     detailHeader,
     detailList
+  },
+  mounted() {
+    this.getDetail()
+  },
+  methods: {
+    async getDetail () {
+      let {data} = await this.$http.get('/api/detail.json',{
+        params:{
+          id: this.$route.params.id
+        }
+      })
+      this.list = data.data.categoryList
+    }
   }
 }
 </script>
