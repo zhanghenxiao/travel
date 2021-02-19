@@ -9,12 +9,16 @@
           <div class="number">39</div>
         </div>
       </div>
-      <commonGallary :imgs='imgs' v-show="showGallary" @change="change"></commonGallary>
+      <!-- 动画 -->
+      <fade>
+        <commonGallary :imgs='imgs' v-show="showGallary" @change="change"></commonGallary>
+      </fade>
   </div>  
 </template>
 
 <script type="text/ecmascript-6">
-import commonGallary from '@/common/gallary/Gallary' 
+import commonGallary from '@/common/gallary/Gallary'
+import fade from '@/common/fade/Fade'
 export default {
   data() {
     return {
@@ -23,7 +27,8 @@ export default {
     }
   },
   components: {
-    commonGallary
+    commonGallary,
+    fade
   },
   methods: {
     handleBannerClick () {
